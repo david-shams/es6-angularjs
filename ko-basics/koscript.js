@@ -18,6 +18,11 @@ var viewModel = {
         fname: ko.observable('John'),
         lname: ko.observable('Doe'),
     }),
+    names: ko.observableArray([
+        {fname:'John', lname: 'Smith'},
+        {fname:'Bob', lname: 'McDonald'},
+        {fname:'Pete', lname: 'Moto'},
+    ]),
     onClick: function(param){
         console.log(param)
     }

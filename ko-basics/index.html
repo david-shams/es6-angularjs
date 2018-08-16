@@ -12,6 +12,13 @@
         padding: 5px;
         margin: 2px;
     }
+    .hover{
+        cursor: pointer;
+    }
+    input{
+        padding: 5px;
+        color: blue;
+    }
     </style>
 </head>
 <body>
@@ -46,11 +53,19 @@
         <span data-bind="text: fname"></span>
         <span data-bind="text: lname"></span>
     </div>
-    <div data-bind="click: onClick($data)">$data</div>
-    <div data-bind="click: onClick($parent ? $parent:'not defined')">$parent</div>
-    <div data-bind="click: onClick($parents)">$parents</div>
-    <div data-bind="click: onClick($root)">$root</div>
+    <div class="hover" data-bind="click: onClick($data)">$data</div>
+    <!-- <div data-bind="click: onClick($parent ? $parent:'not defined')">$parent</div> -->
+    <!-- <div data-bind="click: onClick($parents)">$parents</div> -->
+    <!-- <div data-bind="click: onClick($root)">$root</div> -->
     <button data-bind="click: onClick('param')">onClick()</button>
+    <div data-bind="template: {name: 'myTemplate2', foreach: names}"></div>
+    <script type="text/html" id="myTemplate2" style="display: none">
+        <input type="text" data-bind="value: fname">
+        <input type="text" data-bind="value: lname"><br>
+        <ul data-bind="foreach: $parent.items">
+                <li data-bind="value: $data, text: $data"></li><button data-bind="delete(this)">Delete</button>
+        </ul>
+    </script>
 
     <script src="koscript.js"></script>
 
