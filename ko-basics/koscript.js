@@ -1,6 +1,9 @@
 /// <reference path='node_modules/knockout/build/output/knockout-latest.debug.js' />
 
 var viewModel = {
+    /**
+     * $root
+     */
     fname: ko.observable('David'),
     lname: ko.observable('Shams'),
     handleClick: function(context, element, root){
@@ -25,6 +28,7 @@ var viewModel = {
     ]),
     onClick: function(param){
         console.log(param)
-    }
+    },
+    selection: ko.observableArray([false, true])
 }
 ko.applyBindings(viewModel)

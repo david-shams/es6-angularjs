@@ -19,6 +19,13 @@
         padding: 5px;
         color: blue;
     }
+    button{
+        padding: 5px;
+        background-color: lightblue;
+        color: darkblue;
+        border-radius: 5px;
+        margin: 2px;
+    }
     </style>
 </head>
 <body>
@@ -63,9 +70,49 @@
         <input type="text" data-bind="value: fname">
         <input type="text" data-bind="value: lname"><br>
         <ul data-bind="foreach: $parent.items">
-                <li data-bind="value: $data, text: $data"></li><button data-bind="delete(this)">Delete</button>
+            <li data-bind="value: $data, text: $data"></li><button data-bind="delete(this)">Delete</button>
         </ul>
+        <div data-bind="text: $root.fname"></div>
+        <div data-bind="text: $root.lname"></div>
+        <button data-bind="click: $root.handleClick($context, $element, $root)">handleClick($context, $element, $root)</button>
     </script>
+    <div data-bind="if: selection">True will show</div>
+    <option>
+        <option data-bind="value: selection" value="false">False</option>
+        <option data-bind="value: selection" value="true">True</option>
+    </option>
+    <div data-bind="notif: fale">False will show</div>
+    <hr>
+    <p>
+    Your country:
+    <select data-bind="options: availableCountries,
+                       optionsText: 'countryName',
+                       value: selectedCountry,
+                       optionsCaption: 'Choose...'"></select>
+</p>
+ 
+<div data-bind="visible: selectedCountry"> <!-- Appears when you select something -->
+    You have chosen a country with population
+    <span data-bind="text: selectedCountry() ? selectedCountry().countryPopulation : 'unknown'"></span>.
+</div>
+ 
+<script type="text/javascript">
+    // Constructor for an object with two properties
+    var Country = function(name, population) {
+        this.countryName = name;
+        this.countryPopulation = population;
+    };
+ 
+    var viewModel = {
+        availableCountries : ko.observableArray([
+            new Country("UK", 65000000),
+            new Country("USA", 320000000),
+            new Country("Sweden", 29000000)
+        ]),
+        selectedCountry : ko.observable() // Nothing selected by default
+    };
+</script>
+
 
     <script src="koscript.js"></script>
 
