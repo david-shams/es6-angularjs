@@ -6,6 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Knockout Basics</title>
     <script src="node_modules/knockout/build/output/knockout-latest.debug.js"></script>
+    <style>
+    div{
+        border: solid 1px red;
+        padding: 5px;
+        margin: 2px;
+    }
+    </style>
 </head>
 <body>
 
@@ -18,6 +25,32 @@
     <button data-bind="click: handleClick($context, $element, $root)">handleClick</button>
     
     <button data-bind="enable: items().length < 5"><span data-bind="text: items().length<5 ? items().length: 'Disabled'  "></span></button>
+        <div data-bind="template: 'myTemplate'"></div>
+    <script type="text/html" id="myTemplate" style="display: none">
+            <input type="text" data-bind="value: fname">
+            <input type="text" data-bind="value: lname">
+            <ul data-bind="foreach: items">
+                <li data-bind="value: $data, text: $data"></li><button data-bind="delete(this)">Delete</button>
+            </ul>
+    </script>
+    <div data-bind="if: 2 > 5">
+        2 > 5
+    </div>
+    <div data-bind="if: 2 < 5">
+            2 < 5
+    </div>
+
+    <span data-bind="text: model().fname"></span>
+    <span data-bind="text: model().lname"></span>
+    <div data-bind="with: model()">
+        <span data-bind="text: fname"></span>
+        <span data-bind="text: lname"></span>
+    </div>
+    <div data-bind="click: onClick($data)">$data</div>
+    <div data-bind="click: onClick($parent ? $parent:'not defined')">$parent</div>
+    <div data-bind="click: onClick($parents)">$parents</div>
+    <div data-bind="click: onClick($root)">$root</div>
+    <button data-bind="click: onClick('param')">onClick()</button>
 
     <script src="koscript.js"></script>
 

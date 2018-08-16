@@ -13,6 +13,13 @@ var viewModel = {
     delete: function(index){
         console.log(index);
         this.items.remove(index);
+    },
+    model: ko.observable({
+        fname: ko.observable('John'),
+        lname: ko.observable('Doe'),
+    }),
+    onClick: function(param){
+        console.log(param)
     }
 }
 ko.applyBindings(viewModel)
